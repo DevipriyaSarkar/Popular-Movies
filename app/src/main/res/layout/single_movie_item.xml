@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/single_movie_card_margin"
+    android:layout_marginBottom="@dimen/single_movie_card_margin"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    card_view:cardCornerRadius="@dimen/single_movie_card_corner_radius"
+    card_view:cardElevation="@dimen/single_movie_card_elevation"
+    card_view:cardPreventCornerOverlap="true"
+    card_view:cardUseCompatPadding="true">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/moviePoster"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:minHeight="@dimen/single_movie_item_min_height"
+            android:minWidth="@dimen/single_movie_item_min_width"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/image_movie_poster_content_desc" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/colorGridImageOverlay"
+            android:layout_gravity="bottom">
+
+            <TextView
+                android:id="@+id/movieRating"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:layout_gravity="bottom"
+                android:textAlignment="gravity"
+                android:paddingTop="@dimen/single_movie_rating_padding"
+                android:paddingBottom="@dimen/single_movie_rating_padding"
+                android:paddingRight="@dimen/single_movie_rating_padding"
+                android:paddingEnd="@dimen/single_movie_rating_padding"
+                android:textColor="@color/white"
+                android:drawableLeft="@drawable/star"
+                android:drawableStart="@drawable/star" />
+
+        </LinearLayout>
+    </FrameLayout>
+
+</android.support.v7.widget.CardView>

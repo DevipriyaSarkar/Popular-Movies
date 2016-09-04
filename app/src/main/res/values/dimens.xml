@@ -1,0 +1,19 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="item_width">450dp</dimen>
+    <dimen name="app_bar_layout_height">200dp</dimen>
+    <dimen name="text_view_drawable_padding">5dp</dimen>
+    <dimen name="overview_text_size">20sp</dimen>
+    <dimen name="single_movie_card_margin">8dp</dimen>
+    <dimen name="single_movie_card_corner_radius">8dp</dimen>
+    <dimen name="single_movie_card_elevation">2dp</dimen>
+    <dimen name="single_movie_rating_padding">5dp</dimen>
+    <dimen name="no_fav_text_size">20sp</dimen>
+    <dimen name="recycler_view_grid_padding">8dp</dimen>
+    <dimen name="movie_cardview_layout_width">185px</dimen>
+    <dimen name="single_movie_item_min_height">185px</dimen>
+    <dimen name="single_movie_item_min_width">185px</dimen>
+</resources>

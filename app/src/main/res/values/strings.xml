@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">Popular Movies</string>
+    <string name="title_movie_activity">Movie Details</string>
+    <string name="string_reviews">Reviews</string>
+    <string name="string_trailers">Trailers</string>
+    <string name="string_plot_synopsis">Plot Synopsis</string>
+    <string name="no_fav_text">No Movie Added to Favourites.</string>
+    <string name="action_share">Share</string>
+    <string name="movie_poster_image_content_desc">Movie Poster Image</string>
+    <string name="action_fav">Favourite it</string>
+    <string name="backdrop_image_view_content_desc">Movie Backdrop Image</string>
+    <string name="read_more_expanded_text">Show less</string>
+    <string name="read_more_collapsed_text">Read more</string>
+    <string name="action_filter">Filter</string>
+    <string name="menu_sort_popularity">Popularity</string>
+    <string name="menu_sort_rating">Rating</string>
+    <string name="menu_sort_favourite">Favourites</string>
+    <string name="image_movie_poster_content_desc">Movie Poster</string>
+    <string name="progress_dialog_message">Please wait...</string>
+    <string name="movie_rating_out_off_text">/10</string>
+    <string name="no_reviews_message">No reviews yet.</string>
+    <string name="trailer_play_intent_chooser_message">Complete action using</string>
+    <string name="no_trailer_message">No trailer available.</string>
+    <string name="no_plot_message">Sorry, plot not available.</string>
+    <string name="marked_fav_toast_message">Marked as favourite.</string>
+    <string name="no_internet_toast_message">Oops! No internet connection.</string>
+    <string name="share_action_intent_chooser">Share link with</string>
+    <string name="share_action_extra_text">"Hey, check out the trailer of this amazing movie, "</string>
+    <string name="share_action_no_trailer_toast_message">Sorry. No trailer available to share.</string>
+    <string name="movie_review_by">Review by:</string>
+    <string name="movie_release_date">Release Date:</string>
+    <string name="movie_trailer_content_desc_1">"Trailer "</string>
+    <string name="movie_trailer_content_desc_2">"of the movie "</string>
+</resources>
