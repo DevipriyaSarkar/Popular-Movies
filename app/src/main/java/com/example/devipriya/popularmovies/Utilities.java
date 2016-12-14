@@ -5,5 +5,5 @@ package com.example.devipriya.popularmovies;
  */
 public final class Utilities {
     // TODO add your own TMDB API key
-    public static final String TMDB_API_KEY = "your-api-key";
+    public static final String TMDB_API_KEY = "<your-api-key>";
 }
