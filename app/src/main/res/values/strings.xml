@@ -16,7 +16,7 @@
     <string name="menu_sort_rating">Rating</string>
     <string name="menu_sort_favourite">Favourites</string>
     <string name="image_movie_poster_content_desc">Movie Poster</string>
-    <string name="progress_dialog_message">Please wait...</string>
+    <string name="progress_dialog_message">Please wait…</string>
     <string name="movie_rating_out_off_text">/10</string>
     <string name="no_reviews_message">No reviews yet.</string>
     <string name="trailer_play_intent_chooser_message">Complete action using</string>

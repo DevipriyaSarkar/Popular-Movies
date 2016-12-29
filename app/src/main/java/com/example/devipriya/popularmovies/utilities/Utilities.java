@@ -1,4 +1,4 @@
-package com.example.devipriya.popularmovies;
+package com.example.devipriya.popularmovies.utilities;
 
 /**
  * Created by Devipriya on 09-02-2016.

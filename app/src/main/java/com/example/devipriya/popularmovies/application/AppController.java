@@ -1,4 +1,4 @@
-package com.example.devipriya.popularmovies;
+package com.example.devipriya.popularmovies.application;
 
 import android.app.Application;
 import android.text.TextUtils;
@@ -12,7 +12,7 @@ import com.android.volley.toolbox.Volley;
  */
 public class AppController extends Application {
 
-    public static final String TAG = AppController.class.getSimpleName();
+    private static final String TAG = AppController.class.getSimpleName();
 
     private RequestQueue mRequestQueue;
 
@@ -28,7 +28,7 @@ public class AppController extends Application {
         return mInstance;
     }
 
-    public RequestQueue getRequestQueue() {
+    private RequestQueue getRequestQueue() {
         if (mRequestQueue == null) {
             mRequestQueue = Volley.newRequestQueue(getApplicationContext());
         }

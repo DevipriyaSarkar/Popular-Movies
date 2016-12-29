@@ -1,4 +1,4 @@
-package com.example.devipriya.popularmovies;
+package com.example.devipriya.popularmovies.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -7,17 +7,17 @@ import android.os.Parcelable;
  * Created by Devipriya on 07-02-2016.
  */
 public class MovieItem implements Parcelable {
-    String poster_path;
-    String backdrop_path;
-    String title;
-    String overview;
-    String release_date;
-    int isFavorite; // 0 - not fav, 1 - fav
-    double vote_average;
-    long movie_id;
+    private String poster_path;
+    private String backdrop_path;
+    private String title;
+    private String overview;
+    private String release_date;
+    private int isFavorite; // 0 - not fav, 1 - fav
+    private double vote_average;
+    private long movie_id;
 
-    String[] trailer_path;
-    Review review;
+    private String[] trailer_path;
+    private Review review;
 
     public MovieItem() {
     }
