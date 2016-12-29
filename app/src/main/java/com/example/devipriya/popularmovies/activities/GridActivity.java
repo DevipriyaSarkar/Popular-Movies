@@ -1,4 +1,4 @@
-package com.example.devipriya.popularmovies;
+package com.example.devipriya.popularmovies.activities;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -29,6 +29,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.example.devipriya.popularmovies.R;
+import com.example.devipriya.popularmovies.adapters.CustomMovieGridAdapter;
+import com.example.devipriya.popularmovies.application.AppController;
+import com.example.devipriya.popularmovies.fragments.MovieFragment;
+import com.example.devipriya.popularmovies.models.MovieItem;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -42,7 +47,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Map;
 
-import static com.example.devipriya.popularmovies.Utilities.TMDB_API_KEY;
+import static com.example.devipriya.popularmovies.utilities.Utilities.TMDB_API_KEY;
 
 /**
  * An activity representing a list of Movies. This activity
@@ -55,17 +60,18 @@ import static com.example.devipriya.popularmovies.Utilities.TMDB_API_KEY;
 
 public class GridActivity extends AppCompatActivity {
 
-    static String TAG = GridActivity.class.getSimpleName();
-    RecyclerView movieGrid;
-    GridLayoutManager gridLayoutManager;
-    CustomMovieGridAdapter customMovieGridAdapter;
-    FloatingActionButton tabFavFab;
-    TabFabCallback tabFabCallback;
-    ArrayList<MovieItem> movieArrayList;
-    ProgressDialog pDialog;
-    TextView noFavText;
-    String curDateString, prevDateString;
-    String urlMovies;
+    private static String TAG = GridActivity.class.getSimpleName();
+    private RecyclerView movieGrid;
+    private GridLayoutManager gridLayoutManager;
+    private CustomMovieGridAdapter customMovieGridAdapter;
+    private FloatingActionButton tabFavFab;
+    private TabFabCallback tabFabCallback;
+    private ArrayList<MovieItem> movieArrayList;
+    private ProgressDialog pDialog;
+    private TextView noFavText;
+    private String curDateString;
+    private String prevDateString;
+    private String urlMovies;
 
     private boolean mTwoPane; //whether or not the activity is in two-pane mode, i.e. running on a tablet device
 
@@ -160,7 +166,7 @@ public class GridActivity extends AppCompatActivity {
     private void makeJsonObjectRequest() {
 
         //show the progress dialog
-        showpDialog();
+        showPDialog();
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
                 urlMovies, null, new Response.Listener<JSONObject>() {
@@ -209,7 +215,7 @@ public class GridActivity extends AppCompatActivity {
                 //update the UI as the information is fetched
                 updateUI();
                 // hide the progress dialog
-                hidepDialog();
+                hidePDialog();
             }
         }, new Response.ErrorListener() {
 
@@ -219,7 +225,7 @@ public class GridActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),
                         error.getMessage(), Toast.LENGTH_SHORT).show();
                 // hide the progress dialog
-                hidepDialog();
+                hidePDialog();
             }
         });
 
@@ -228,19 +234,19 @@ public class GridActivity extends AppCompatActivity {
     }
 
     //show dialog box
-    private void showpDialog() {
+    private void showPDialog() {
         if (!pDialog.isShowing())
             pDialog.show();
     }
 
     //hide dialog box
-    private void hidepDialog() {
+    private void hidePDialog() {
         if (pDialog.isShowing())
             pDialog.dismiss();
     }
 
     //update UI
-    public void updateUI() {
+    private void updateUI() {
         movieGrid.setVisibility(View.VISIBLE);
         noFavText.setVisibility(View.GONE);
         customMovieGridAdapter = new CustomMovieGridAdapter(this, movieArrayList);
@@ -272,14 +278,14 @@ public class GridActivity extends AppCompatActivity {
     }
 
     //check for internet connectivity
-    public boolean isInternetAvailable() {
+    private boolean isInternetAvailable() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         return cm.getActiveNetworkInfo() != null &&
                 cm.getActiveNetworkInfo().isConnectedOrConnecting();
     }
 
     //retrieve favourite movies from db when offline
-    public void retrieveFavFromDB() {
+    private void retrieveFavFromDB() {
         //initialise the array list
         movieArrayList = new ArrayList<>();
 

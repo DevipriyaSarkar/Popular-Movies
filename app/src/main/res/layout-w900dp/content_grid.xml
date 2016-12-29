@@ -10,7 +10,7 @@
     android:divider="?android:attr/dividerHorizontal"
     android:orientation="horizontal"
     android:showDividers="middle"
-    tools:context=".GridActivity">
+    tools:context=".activities.GridActivity">
 
     <!--
     This layout is a two-pane layout for the Movies
@@ -25,7 +25,7 @@
         android:layout_marginRight="@dimen/grid_master_layout_margin_right"
         android:layout_marginEnd="@dimen/grid_master_layout_margin_right"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:context=".GridActivity"
+        tools:context=".activities.GridActivity"
         tools:showIn="@layout/activity_grid">
 
         <android.support.v7.widget.RecyclerView

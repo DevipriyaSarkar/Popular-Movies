@@ -1,4 +1,4 @@
-package com.example.devipriya.popularmovies;
+package com.example.devipriya.popularmovies.fragments;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -10,7 +10,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.graphics.Palette;
@@ -36,6 +35,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.borjabravo.readmoretextview.ReadMoreTextView;
+import com.example.devipriya.popularmovies.R;
+import com.example.devipriya.popularmovies.activities.GridActivity;
+import com.example.devipriya.popularmovies.activities.MovieActivity;
+import com.example.devipriya.popularmovies.application.AppController;
+import com.example.devipriya.popularmovies.models.MovieItem;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.RequestCreator;
@@ -51,7 +55,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
-import static com.example.devipriya.popularmovies.Utilities.TMDB_API_KEY;
+import static com.example.devipriya.popularmovies.utilities.Utilities.TMDB_API_KEY;
 
 /**
  * Created by Devipriya on 04-11-2016.
@@ -66,9 +70,10 @@ import static com.example.devipriya.popularmovies.Utilities.TMDB_API_KEY;
 
 public class MovieFragment extends Fragment implements MovieActivity.FabCallback, MovieActivity.BgCallback, GridActivity.TabFabCallback {
 
-    static String TAG = MovieFragment.class.getSimpleName();
+    private static String TAG = MovieFragment.class.getSimpleName();
 
-    static final int TRAILER_THUMB_WIDTH = 320, TRAILER_THUMB_HEIGHT = 180;    // youtube thumbnail dimensions loaded by mq default
+    private static final int TRAILER_THUMB_WIDTH = 320;
+    private static final int TRAILER_THUMB_HEIGHT = 180;    // youtube thumbnail dimensions loaded by mq default
 
     //The fragment argument representing the movie ID that this fragment represents.
     public static final String ARG_MOVIE_ID = "movie_id";
@@ -76,20 +81,22 @@ public class MovieFragment extends Fragment implements MovieActivity.FabCallback
     //The fragment argument representing the internet availability.
     public static final String ARG_INTERNET = "internet";
 
-    MovieItem currentMovie;
-    ScrollView parentScrollLayout;
-    LinearLayout showIfInternetLayout;
-    ImageView posterImage;
-    ReadMoreTextView overviewText;
-    TextView plotSynopsisTV, reviewsTV, trailersTV;
-    TextView releaseDateText, voteText, yearText, titleText;
-    ProgressDialog pDialog;
-    String urlCurrentMovie; //to fetch reviews and trailers
-    long movie_id;
-    ArrayList<MovieItem.Review> reviewArrayList;
-    ArrayList<String> trailerArray;
-    boolean internetAvailable;
-    Typeface notoRegular, notoBold;
+    private MovieItem currentMovie;
+    private ScrollView parentScrollLayout;
+    private LinearLayout showIfInternetLayout;
+    private ImageView posterImage;
+    private ReadMoreTextView overviewText;
+    private TextView releaseDateText;
+    private TextView voteText;
+    private TextView yearText;
+    private TextView titleText;
+    private ProgressDialog pDialog;
+    private String urlCurrentMovie; //to fetch reviews and trailers
+    private long movie_id;
+    private ArrayList<MovieItem.Review> reviewArrayList;
+    private ArrayList<String> trailerArray;
+    private boolean internetAvailable;
+    private Typeface notoRegular;
 
     public MovieFragment() {
     }
@@ -101,7 +108,9 @@ public class MovieFragment extends Fragment implements MovieActivity.FabCallback
         if (getArguments().containsKey(ARG_MOVIE_ID)) {
             //get the movie clicked
             currentMovie = getArguments().getParcelable(ARG_MOVIE_ID);
-            movie_id = currentMovie.getMovieId();
+            if (currentMovie != null) {
+                movie_id = currentMovie.getMovieId();
+            }
             //check whether internet available
             internetAvailable = getArguments().getBoolean(ARG_INTERNET, false);
         }
@@ -114,7 +123,7 @@ public class MovieFragment extends Fragment implements MovieActivity.FabCallback
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.content_movie, container, false);
         notoRegular = Typeface.createFromAsset(getContext().getAssets(), "fonts/NotoSans-Regular.ttf");
-        notoBold = Typeface.createFromAsset(getContext().getAssets(), "fonts/NotoSans-Bold.ttf");
+        Typeface notoBold = Typeface.createFromAsset(getContext().getAssets(), "fonts/NotoSans-Bold.ttf");
 
         parentScrollLayout = (ScrollView) rootView.findViewById(R.id.parentScrollLayout);
         parentScrollLayout.setVisibility(View.INVISIBLE);
@@ -129,8 +138,6 @@ public class MovieFragment extends Fragment implements MovieActivity.FabCallback
         trailerArray = new ArrayList<>();
 
         //initialize progress dialog
-
-        //initialize progress dialog
         pDialog = new ProgressDialog(getActivity());
         pDialog.setMessage(getString(R.string.progress_dialog_message));
         pDialog.setCancelable(false);
@@ -142,9 +149,9 @@ public class MovieFragment extends Fragment implements MovieActivity.FabCallback
         voteText = (TextView) rootView.findViewById(R.id.voteText);
         yearText = (TextView) rootView.findViewById(R.id.yearText);
         titleText = (TextView) rootView.findViewById(R.id.titleText);
-        plotSynopsisTV = (TextView) rootView.findViewById(R.id.string_plot_synopsis);
-        reviewsTV = (TextView) rootView.findViewById(R.id.string_reviews);
-        trailersTV = (TextView) rootView.findViewById(R.id.string_trailers);
+        TextView plotSynopsisTV = (TextView) rootView.findViewById(R.id.string_plot_synopsis);
+        TextView reviewsTV = (TextView) rootView.findViewById(R.id.string_reviews);
+        TextView trailersTV = (TextView) rootView.findViewById(R.id.string_trailers);
 
         //setting font
         overviewText.setTypeface(notoRegular);
@@ -169,7 +176,7 @@ public class MovieFragment extends Fragment implements MovieActivity.FabCallback
     //Method to make json object request
     private void makeJsonObjectRequest() {
 
-        showpDialog();
+        showPDialog();
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
                 urlCurrentMovie, null, new Response.Listener<JSONObject>() {
@@ -237,7 +244,7 @@ public class MovieFragment extends Fragment implements MovieActivity.FabCallback
 
                 if (isAdded())
                     updateUI();
-                hidepDialog();
+                hidePDialog();
             }
         }, new Response.ErrorListener() {
 
@@ -247,7 +254,7 @@ public class MovieFragment extends Fragment implements MovieActivity.FabCallback
                 Toast.makeText(getActivity(),
                         error.getMessage(), Toast.LENGTH_SHORT).show();
                 // hide the progress dialog
-                hidepDialog();
+                hidePDialog();
             }
         });
 
@@ -255,17 +262,17 @@ public class MovieFragment extends Fragment implements MovieActivity.FabCallback
         AppController.getInstance().addToRequestQueue(jsonObjReq);
     }
 
-    private void showpDialog() {
+    private void showPDialog() {
         if (!pDialog.isShowing())
             pDialog.show();
     }
 
-    private void hidepDialog() {
+    private void hidePDialog() {
         if (pDialog.isShowing())
             pDialog.dismiss();
     }
 
-    public void updateUI() {
+    private void updateUI() {
         //make UI visible
         parentScrollLayout.setVisibility(View.VISIBLE);
 
@@ -317,7 +324,7 @@ public class MovieFragment extends Fragment implements MovieActivity.FabCallback
     }
 
     //load trailers and reviews - called only if internet available
-    public void updateExtra() {
+    private void updateExtra() {
         //make trailers and review layout visible
         showIfInternetLayout.setVisibility(View.VISIBLE);
 

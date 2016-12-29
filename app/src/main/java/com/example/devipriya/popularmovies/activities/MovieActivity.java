@@ -1,4 +1,4 @@
-package com.example.devipriya.popularmovies;
+package com.example.devipriya.popularmovies.activities;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -19,6 +19,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.example.devipriya.popularmovies.R;
+import com.example.devipriya.popularmovies.fragments.MovieFragment;
+import com.example.devipriya.popularmovies.models.MovieItem;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -35,12 +38,11 @@ import com.squareup.picasso.Picasso;
 
 public class MovieActivity extends AppCompatActivity {
 
-    CollapsingToolbarLayout collapsingToolbarLayout;
-    AppBarLayout appBarLayout;
-    ImageView backdropImage;
-    FabCallback fabCallback;
-    BgCallback bgCallback;
-    FloatingActionButton favFab;
+    private CollapsingToolbarLayout collapsingToolbarLayout;
+    private ImageView backdropImage;
+    private FabCallback fabCallback;
+    private BgCallback bgCallback;
+    private FloatingActionButton favFab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +60,7 @@ public class MovieActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        appBarLayout = (AppBarLayout) findViewById(R.id.appBarLayout);
+        AppBarLayout appBarLayout = (AppBarLayout) findViewById(R.id.appBarLayout);
         backdropImage = (ImageView) findViewById(R.id.backdropImage);
         favFab = (FloatingActionButton) findViewById(R.id.favFab);
 
@@ -80,7 +82,7 @@ public class MovieActivity extends AppCompatActivity {
                         collapsingToolbarLayout.setTitle(movieName);
                         isShow = true;
                     } else if(isShow) {
-                        collapsingToolbarLayout.setTitle(" ");//carefull there should a space between double quote otherwise it wont work
+                        collapsingToolbarLayout.setTitle(" ");  // careful there should a space between double quote otherwise it wont work
                         isShow = false;
                     }
                 }
